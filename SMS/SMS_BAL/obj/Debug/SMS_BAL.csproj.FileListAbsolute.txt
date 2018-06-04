@@ -1,0 +1,16 @@
+D:\Projects\Web\Demo\MVC_DEMO\SMS\SMS_BAL\bin\Debug\SMS_BAL.dll
+D:\Projects\Web\Demo\MVC_DEMO\SMS\SMS_BAL\bin\Debug\SMS_BAL.pdb
+D:\Projects\Web\Demo\MVC_DEMO\SMS\SMS_BAL\obj\Debug\SMS_BAL.csprojResolveAssemblyReference.cache
+D:\Projects\Web\Demo\MVC_DEMO\SMS\SMS_BAL\obj\Debug\SMS_BAL.dll
+D:\Projects\Web\Demo\MVC_DEMO\SMS\SMS_BAL\obj\Debug\SMS_BAL.pdb
+D:\Samples\MVC\SchoolManagementMVC\SMS\SMS_BAL\bin\Debug\SMS_BAL.dll
+D:\Samples\MVC\SchoolManagementMVC\SMS\SMS_BAL\bin\Debug\SMS_BAL.pdb
+D:\Samples\MVC\SchoolManagementMVC\SMS\SMS_BAL\bin\Debug\SMS_DAL.dll
+D:\Samples\MVC\SchoolManagementMVC\SMS\SMS_BAL\bin\Debug\SMS_Entities.dll
+D:\Samples\MVC\SchoolManagementMVC\SMS\SMS_BAL\bin\Debug\SMS_Common.dll
+D:\Samples\MVC\SchoolManagementMVC\SMS\SMS_BAL\bin\Debug\SMS_DAL.pdb
+D:\Samples\MVC\SchoolManagementMVC\SMS\SMS_BAL\bin\Debug\SMS_Entities.pdb
+D:\Samples\MVC\SchoolManagementMVC\SMS\SMS_BAL\bin\Debug\SMS_Common.pdb
+D:\Samples\MVC\SchoolManagementMVC\SMS\SMS_BAL\obj\Debug\SMS_BAL.csprojResolveAssemblyReference.cache
+D:\Samples\MVC\SchoolManagementMVC\SMS\SMS_BAL\obj\Debug\SMS_BAL.dll
+D:\Samples\MVC\SchoolManagementMVC\SMS\SMS_BAL\obj\Debug\SMS_BAL.pdb

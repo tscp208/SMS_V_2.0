@@ -1,0 +1,14 @@
+D:\Projects\Web\Demo\MVC_DEMO\SMS\SMS_DAL\bin\Debug\SMS_DAL.dll
+D:\Projects\Web\Demo\MVC_DEMO\SMS\SMS_DAL\bin\Debug\SMS_DAL.pdb
+D:\Projects\Web\Demo\MVC_DEMO\SMS\SMS_DAL\obj\Debug\SMS_DAL.csprojResolveAssemblyReference.cache
+D:\Projects\Web\Demo\MVC_DEMO\SMS\SMS_DAL\obj\Debug\SMS_DAL.dll
+D:\Projects\Web\Demo\MVC_DEMO\SMS\SMS_DAL\obj\Debug\SMS_DAL.pdb
+D:\Samples\MVC\SchoolManagementMVC\SMS\SMS_DAL\bin\Debug\SMS_DAL.dll
+D:\Samples\MVC\SchoolManagementMVC\SMS\SMS_DAL\bin\Debug\SMS_DAL.pdb
+D:\Samples\MVC\SchoolManagementMVC\SMS\SMS_DAL\bin\Debug\SMS_Common.dll
+D:\Samples\MVC\SchoolManagementMVC\SMS\SMS_DAL\bin\Debug\SMS_Entities.dll
+D:\Samples\MVC\SchoolManagementMVC\SMS\SMS_DAL\bin\Debug\SMS_Common.pdb
+D:\Samples\MVC\SchoolManagementMVC\SMS\SMS_DAL\bin\Debug\SMS_Entities.pdb
+D:\Samples\MVC\SchoolManagementMVC\SMS\SMS_DAL\obj\Debug\SMS_DAL.csprojResolveAssemblyReference.cache
+D:\Samples\MVC\SchoolManagementMVC\SMS\SMS_DAL\obj\Debug\SMS_DAL.dll
+D:\Samples\MVC\SchoolManagementMVC\SMS\SMS_DAL\obj\Debug\SMS_DAL.pdb
