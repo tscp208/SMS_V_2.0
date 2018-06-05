@@ -3,3 +3,8 @@ D:\Samples\MVC\SchoolManagementMVC\SMS\SMS_Common\bin\Debug\SMS_Common.pdb
 D:\Samples\MVC\SchoolManagementMVC\SMS\SMS_Common\obj\Debug\SMS_Common.csprojResolveAssemblyReference.cache
 D:\Samples\MVC\SchoolManagementMVC\SMS\SMS_Common\obj\Debug\SMS_Common.dll
 D:\Samples\MVC\SchoolManagementMVC\SMS\SMS_Common\obj\Debug\SMS_Common.pdb
+C:\Users\kanthh\Documents\GitHub\SMS_V_2.0\SMS\SMS_Common\bin\Debug\SMS_Common.dll
+C:\Users\kanthh\Documents\GitHub\SMS_V_2.0\SMS\SMS_Common\bin\Debug\SMS_Common.pdb
+C:\Users\kanthh\Documents\GitHub\SMS_V_2.0\SMS\SMS_Common\obj\Debug\SMS_Common.csprojResolveAssemblyReference.cache
+C:\Users\kanthh\Documents\GitHub\SMS_V_2.0\SMS\SMS_Common\obj\Debug\SMS_Common.dll
+C:\Users\kanthh\Documents\GitHub\SMS_V_2.0\SMS\SMS_Common\obj\Debug\SMS_Common.pdb

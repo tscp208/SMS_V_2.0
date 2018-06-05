@@ -12,3 +12,12 @@ D:\Samples\MVC\SchoolManagementMVC\SMS\SMS_DAL\bin\Debug\SMS_Entities.pdb
 D:\Samples\MVC\SchoolManagementMVC\SMS\SMS_DAL\obj\Debug\SMS_DAL.csprojResolveAssemblyReference.cache
 D:\Samples\MVC\SchoolManagementMVC\SMS\SMS_DAL\obj\Debug\SMS_DAL.dll
 D:\Samples\MVC\SchoolManagementMVC\SMS\SMS_DAL\obj\Debug\SMS_DAL.pdb
+C:\Users\kanthh\Documents\GitHub\SMS_V_2.0\SMS\SMS_DAL\bin\Debug\SMS_DAL.dll
+C:\Users\kanthh\Documents\GitHub\SMS_V_2.0\SMS\SMS_DAL\bin\Debug\SMS_DAL.pdb
+C:\Users\kanthh\Documents\GitHub\SMS_V_2.0\SMS\SMS_DAL\bin\Debug\SMS_Common.dll
+C:\Users\kanthh\Documents\GitHub\SMS_V_2.0\SMS\SMS_DAL\bin\Debug\SMS_Entities.dll
+C:\Users\kanthh\Documents\GitHub\SMS_V_2.0\SMS\SMS_DAL\bin\Debug\SMS_Common.pdb
+C:\Users\kanthh\Documents\GitHub\SMS_V_2.0\SMS\SMS_DAL\bin\Debug\SMS_Entities.pdb
+C:\Users\kanthh\Documents\GitHub\SMS_V_2.0\SMS\SMS_DAL\obj\Debug\SMS_DAL.csprojResolveAssemblyReference.cache
+C:\Users\kanthh\Documents\GitHub\SMS_V_2.0\SMS\SMS_DAL\obj\Debug\SMS_DAL.dll
+C:\Users\kanthh\Documents\GitHub\SMS_V_2.0\SMS\SMS_DAL\obj\Debug\SMS_DAL.pdb
