@@ -1,12 +1,13 @@
 ﻿
 $("#btnAddUserType").click(function () {
-    debugger;
     $.ajax({
         type: "GET",
         url: "/UserType/AddUserType"
     }).done(function (response) {
         $("#modalBody").html('');
         $("#modalBody").html(response);
+        $("#modalTitle").html('');
+        $("#modalTitle").html('Add User Type');
         $("#userTypeModal").modal({
             backdrop: 'static',
             keyboard: false
@@ -18,13 +19,14 @@ $("#btnAddUserType").click(function () {
 });
 
 function EditUserType(userTypeID) {
-    debugger;
     $.ajax({
         type: "GET",
         url: "/UserType/AddUserType?userTypeID=" + userTypeID
     }).done(function (response) {
         $("#modalBody").html('');
         $("#modalBody").html(response);
+        $("#modalTitle").html('');
+        $("#modalTitle").html('Update User Type');
         $("#userTypeModal").modal({
             backdrop: 'static',
             keyboard: false

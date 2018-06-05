@@ -10,8 +10,11 @@
         <h3>User Types</h3>
     </div>
 </div>
-<div class="col-lg-1 pt30">
+<div class="col-lg-1 pt20">
     <input id="btnAddUserType" type="button" value="Add User Type" class="btn btn-primary pull-right pr30" />
+</div>
+<div class="col-lg-12">
+    <hr />
 </div>
 <div id="UserTypeGridBlock">
     @{Html.RenderAction("UserTypeGrid", "UserType");}
@@ -24,7 +27,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Add User Type</h4>
+                <h4 id="modalTitle" class="modal-title">Add User Type</h4>
             </div>
             <div class="modal-body" id="modalBody">
             </div>
