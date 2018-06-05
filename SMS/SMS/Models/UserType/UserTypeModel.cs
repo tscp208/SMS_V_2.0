@@ -9,6 +9,14 @@ namespace SMS.Models.UserType
 {
     public class UserTypeModel
     {
+        public UserTypeModel()
+        {
+            CreatedBy = 1;
+            CreatedOn = DateTime.Now.ToString();
+            ModifiedBy = 1;
+            ModifiedOn = DateTime.Now.ToString();
+        }
+
         public int UserTypeID { get; set; }
 
         [Required(ErrorMessage = "User Type Required.!")]
