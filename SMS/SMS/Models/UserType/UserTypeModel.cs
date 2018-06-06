@@ -42,13 +42,18 @@ namespace SMS.Models.UserType
     {
         public int UserTypeID { get; set; }
 
-        [Display(Name = "Sr. No")]
+        //[Display(Name = "Sr. No")]
         public int SrNo { get; set; }
 
-        [Display(Name = "User Type")]
+        //[Display(Name = "User Type")]
         public string UserTypeName { get; set; }
 
-        [Display(Name = "Description")]
+        //[Display(Name = "Description")]
         public string UserTypeDesc { get; set; }
+    }
+
+    public class DataTableData
+    {
+        public List<UserTypeViewModel> data { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using SMS.Models.UserType;
+﻿using Newtonsoft.Json;
+using SMS.Models.UserType;
 using SMS_BAL;
 using SMS_Entities;
 using System;
@@ -133,5 +134,38 @@ namespace SMS.Controllers
                 return Json(new { Message = "Operation Failed..!", Status = true }, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult GetUserTypeData()
+        {
+            List<UserTypeViewModel> userTypes = new List<UserTypeViewModel>();
+            DataTableData d = new DataTableData();
+            userTypes = GetUserTypes();
+            d.data = userTypes;
+            //string search = Request.QueryString["search[value]"];
+            //int sortColumn = -1;
+            //string sortDirection = "asc";
+            //if (length == -1)
+            //{
+            //    length = TOTAL_ROWS;
+            //}
+
+            //// note: we only sort one column at a time
+            //if (Request.QueryString["order[0][column]"] != null)
+            //{
+            //    sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
+            //}
+            //if (Request.QueryString["order[0][dir]"] != null)
+            //{
+            //    sortDirection = Request.QueryString["order[0][dir]"];
+            //}
+
+            //DataTableData dataTableData = new DataTableData();
+            //dataTableData.draw = draw;
+            //dataTableData.recordsTotal = TOTAL_ROWS;
+            //int recordsFiltered = 0;
+            //dataTableData.data = FilterData(ref recordsFiltered, start, length, search, sortColumn, sortDirection);
+            //dataTableData.recordsFiltered = recordsFiltered;
+
+            return Json(new { data = userTypes }, JsonRequestBehavior.AllowGet);
+        }
     }
 }

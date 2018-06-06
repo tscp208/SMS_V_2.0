@@ -1,4 +1,55 @@
-﻿
+﻿$(document).ready(function () {
+    $('#dtUserTypes').dataTable({
+        "paging": true,
+        "processing": true,
+        "serverSide": false,
+        "info": true,
+        "lengthMenu": [[2, 20, 50, -1], [2, 20, 50, "All"]],
+        "ajax": {
+            "url": "/UserType/GetUserTypeData",
+            "type": "GET",
+            "dataSrc": function (result) {
+                return result.data;
+            }
+        },
+        "columnDefs":
+        [{
+            "targets": [0],
+            "visible": false,
+            "searchable": false
+        },
+        {
+            "targets": [1],
+            "searchable": false
+        },
+        {
+            "targets": [2],
+            "searchable": false
+        },
+        {
+            "targets": [3],
+            "searchable": false,
+            "orderable": false
+        }],
+        "columns": [
+            { "data": "UserTypeID", "name": "UserTypeID", "autoWidth": true },
+            { "data": "SrNo", "name": "SrNo", "title": "Sr No.", "autoWidth": true },
+            { "data": "UserTypeName", "title": "User Type", "name": "UserTypeName", "autoWidth": true },
+            { "data": "UserTypeDesc", "name": "UserTypeDesc", "title": "Description", "autoWidth": true },
+            {
+                "render": function (data, type, full, meta)
+                { return "<a href='#' class='btn btn-info' onclick = EditUserType('" + full.UserTypeID + "'); >Edit</a>"; }
+            },
+            {
+                "render": function (data, type, row)
+                { return "<a href='#' class='btn btn-danger' onclick=DeleteUserType('" + row.UserTypeID + "'); >Delete</a>"; }
+            }
+        ],
+        aaSorting: [[0, 'asc']]
+    });
+});
+
+
 $("#btnAddUserType").click(function () {
     $.ajax({
         type: "GET",
