@@ -87,5 +87,16 @@ namespace SMS.Controllers
                 return Json(new { Message = "Operation Failed..!", Status = status }, JsonRequestBehavior.AllowGet);
             }
         }
+
+        public JsonResult DeleteUser(int UserID)
+        {
+            bool status = userBAL.UsersDelete(UserID);
+
+            if (status)
+                return Json(new { Message = "User deleted successfully." }, JsonRequestBehavior.AllowGet);
+            else
+                return Json(new { Message = "Operation failed." }, JsonRequestBehavior.AllowGet);
+
+        }
     }
 }

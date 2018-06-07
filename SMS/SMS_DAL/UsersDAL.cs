@@ -109,7 +109,30 @@ namespace SMS_DAL
             }
         }
 
-
+        public bool DeleteUser(int UserID)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(Connection.dbConnection))
+                {
+                    con.Open();
+                    using (SqlCommand cmd = new SqlCommand("usp_UsersDelete", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@UserID", UserID);
+                        int cnt = cmd.ExecuteNonQuery();
+                        if (cnt > 0)
+                            return true;
+                        else
+                            return false;                    
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
 
     }
 

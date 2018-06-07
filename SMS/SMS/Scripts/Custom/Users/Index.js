@@ -17,3 +17,19 @@
         //$('#userModal').modal('show');
     });
 });
+
+function DeleteUser(UserID) {
+    if (confirm('Are you sure you want to delete user?')) {
+        $.ajax({
+            type: "GET",
+            url: "/Users/DeleteUser?UserID=" + UserID,
+            success: function (response) {
+
+            },
+            error: function () {
+                debugger;
+            }
+        })
+    }
+
+}

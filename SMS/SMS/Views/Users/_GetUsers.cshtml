@@ -67,7 +67,12 @@
                                 @Html.DisplayFor(modelItem => item.Address)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Gender)
+                                @*@if (item.Gender == "M") {<label style="font-weight:12;">Male</label> } else { <label>Female</label> }*@
+                                @if (item.Gender == "M")
+                                { @Html.Raw("Male") }
+                                else
+                                { @Html.Raw("Female") }
+                                @*@Html.DisplayFor(modelItem => item.Gender == "M" ? "MALE" : "FEMALE")*@
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.State)
@@ -83,7 +88,8 @@
                             </td>
                             <td>
                                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                                @*@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                                @Html.ActionLink(" ", "", "", new { UserID = item.UserID }, new { @class = "glyphicon glyphicon-remove", style = "font-size:17px;color: #ff000094;text-decoration:none;", onclick = "DeleteUser(" + item.UserID + "); return false;" })
                             </td>
                         </tr>
                     }

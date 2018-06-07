@@ -29,5 +29,10 @@ namespace SMS_BAL
             }
         }
 
+        public bool UsersDelete(int UserID)
+        {
+            return userdal.DeleteUser(UserID);
+        }
+
     }
 }
