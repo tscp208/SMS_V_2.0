@@ -31,5 +31,22 @@ function DeleteUser(UserID) {
             }
         })
     }
+}
 
+function EditUser(UserID) {
+    debugger;
+    $.ajax({
+        type: "GET",
+        url: "/Users/InsertUser?UserID=" + UserID
+    }).done(function (response) {
+        $("#UsermodalBody").html('');
+        $("#UsermodalBody").html(response);
+        $("#userModal").modal({
+            backdrop: 'static',
+            keyboard: false
+        });
+        $("#userModal").modal('show');
+        //$("form").each(function () { $.data($(this)[0], 'validator', false); });
+        //$.validator.unobtrusive.parse("form");
+    });
 }

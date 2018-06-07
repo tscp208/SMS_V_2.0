@@ -49,8 +49,22 @@ namespace SMS.Controllers
         {
             if (UserID > 0)
             {
+                UsersEntity userEntity = new UsersEntity();
+                userEntity = userBAL.GetUsersByID(UserID);
+
                 UsersModel umodel = new UsersModel();
-                return PartialView("", umodel);
+                umodel.UserID = userEntity.UserID;
+                umodel.UserName = userEntity.UserName;
+                umodel.FirstName = userEntity.FirstName;
+                umodel.LastName = userEntity.LastName;
+                umodel.Address = userEntity.Address;
+                umodel.Gender = userEntity.Gender;
+                umodel.State = userEntity.State;
+                umodel.City = userEntity.City;
+                umodel.ContactNo = userEntity.ContactNo;
+                umodel.Email = userEntity.EmailAddress;
+
+                return PartialView("_InsertUser", umodel);
             }
             else
             {

@@ -17,16 +17,21 @@ namespace SMS_BAL
             return userdal.GetUsers();
         }
 
+        public UsersEntity GetUsersByID(int UsersID)
+        {
+            return userdal.GetUsersByID(UsersID);
+        }
+
         public bool UsersUpdateInsert(UsersEntity userentity)
         {
-            if (userentity.UserID > 0)
-            {
-                return true;
-            }
-            else
-            {
+            //if (userentity.UserID > 0)
+            //{
+            //    return true;
+            //}
+            //else
+            //{
                 return userdal.InsertUsers(userentity);
-            }
+            //}
         }
 
         public bool UsersDelete(int UserID)

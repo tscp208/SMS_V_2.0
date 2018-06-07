@@ -87,7 +87,8 @@
                                 @Html.DisplayFor(modelItem => item.Email)
                             </td>
                             <td>
-                                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                                @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |*@
+                                @Html.ActionLink(" ", "", "", new { id = item.UserID }, new { @class = "glyphicon glyphicon-edit", style = "font-size:17px;text-decoration:none;", onclick = "EditUser(" + item.UserID + "); return false;" }) |
                                 @*@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
                                 @Html.ActionLink(" ", "", "", new { UserID = item.UserID }, new { @class = "glyphicon glyphicon-remove", style = "font-size:17px;color: #ff000094;text-decoration:none;", onclick = "DeleteUser(" + item.UserID + "); return false;" })
                             </td>
