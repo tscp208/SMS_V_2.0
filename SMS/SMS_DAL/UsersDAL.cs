@@ -68,6 +68,57 @@ namespace SMS_DAL
             }
         }
 
+        public UsersEntity GetUsersByID(int UsersID)
+        {
+            dt = new DataTable();
+            UsersEntity UsersEntity = new UsersEntity();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(Connection.dbConnection))
+                {
+                    con.Open();
+                    using (SqlCommand cmd = new SqlCommand("usp_GetUsersByID", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@UserID", UsersID);
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            da.Fill(dt);
+                        }
+                    }
+                }
+                UsersEntity = dt.AsEnumerable().Select(item => new UsersEntity()
+                {
+                    SrNo = Convert.ToInt32(item["Srno"]),
+                    UserID = Convert.ToInt32(item["UserID"]),
+                    UserName = Convert.ToString(item["UserName"]),
+                    FirstName = Convert.ToString(item["FirstName"]),
+                    LastName = Convert.ToString(item["LastName"]),
+                    Gender = Convert.ToString(item["Gender"]),
+                    Address = Convert.ToString(item["Address"]),
+                    State = Convert.ToString(item["State"]),
+                    City = Convert.ToString(item["City"]),
+                    ContactNo = Convert.ToString(item["ContactNo"]),
+                    EmailAddress = Convert.ToString(item["EmailAdd"]),
+                    DOB = Convert.ToString(item["DOB"]),
+                    UserTypeID = Convert.ToInt32(item["UserTypeID"]),
+                    UserTypeName = Convert.ToString(item["UserTypeName"])
+                }
+                    ).FirstOrDefault();
+
+                return UsersEntity;
+            }
+            catch (Exception ex)
+            {
+                return new UsersEntity();
+
+            }
+            finally
+            {
+                dt = null;
+            }
+        }
+
         public bool InsertUsers(UsersEntity userentity)
         {
 
@@ -75,10 +126,17 @@ namespace SMS_DAL
             {
                 using (SqlConnection con = new SqlConnection(Connection.dbConnection))
                 {
+                    string SpName = string.Empty;
+                    if (userentity.UserID != 0)
+                        SpName = "usp_UsersUpdate";
+                    else
+                        SpName = "usp_UsersInsert";
                     con.Open();
-                    using (SqlCommand cmd = new SqlCommand("usp_UsersInsert", con))
+                    using (SqlCommand cmd = new SqlCommand(SpName, con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
+                        if (userentity.UserID != 0)
+                        { cmd.Parameters.AddWithValue("@UserID", userentity.UserID); }
                         cmd.Parameters.AddWithValue("@UserName", userentity.UserName);
                         //cmd.Parameters.AddWithValue("@Password", userentity.Password);
                         cmd.Parameters.AddWithValue("@FirstName", userentity.FirstName);
@@ -124,7 +182,7 @@ namespace SMS_DAL
                         if (cnt > 0)
                             return true;
                         else
-                            return false;                    
+                            return false;
                     }
                 }
             }
