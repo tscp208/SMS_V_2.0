@@ -1,13 +1,13 @@
 ﻿$(document).ready(function () {
     $('#dtUserTypes').dataTable({
-        "paging": true,
-        "processing": true,
-        "serverSide": false,
-        "info": true,
-        "lengthMenu": [[2, 20, 50, -1], [2, 20, 50, "All"]],
+        "processing": true, // for show progress bar  
+        "serverSide": true, // for process server side
+        "lengthMenu": [[5, 10, 20, 50, 100], [5, 10, 20, 50, 100]],
+        //"info": true,
         "ajax": {
             "url": "/UserType/GetUserTypeData",
-            "type": "GET",
+            "type": "POST",
+            "datatype": "json",
             "dataSrc": function (result) {
                 return result.data;
             }
@@ -20,7 +20,8 @@
         },
         {
             "targets": [1],
-            "searchable": false
+            "searchable": false,
+            "orderable": false
         },
         {
             "targets": [2],
@@ -28,7 +29,10 @@
         },
         {
             "targets": [3],
-            "searchable": false,
+            "searchable": false
+        },
+        {
+            "targets": [4],
             "orderable": false
         }],
         "columns": [
@@ -38,17 +42,19 @@
             { "data": "UserTypeDesc", "name": "UserTypeDesc", "title": "Description", "autoWidth": true },
             {
                 "render": function (data, type, full, meta)
-                { return "<a href='#' class='btn btn-info' onclick = EditUserType('" + full.UserTypeID + "'); >Edit</a>"; }
-            },
-            {
-                "render": function (data, type, row)
-                { return "<a href='#' class='btn btn-danger' onclick=DeleteUserType('" + row.UserTypeID + "'); >Delete</a>"; }
+                { return "<a href='#' class='glyphicon glyphicon-edit' style='font-size:17px;text-decoration:none;' onclick = EditUserType('" + full.UserTypeID + "'); ></a> <a href='#' class='glyphicon glyphicon-remove' style='font-size:17px;color: #ff000094;text-decoration:none;' onclick=DeleteUserType('" + full.UserTypeID + "'); ></a>"; }
             }
         ],
         aaSorting: [[0, 'asc']]
     });
-});
 
+    $('#dtUserTypes_filter input').unbind();
+    $('#dtUserTypes_filter input').bind('keyup', function (e) {
+        if (e.keyCode == 13) {
+            $('#dtUserTypes').DataTable().search(this.value).draw();
+        }
+    });
+});
 
 $("#btnAddUserType").click(function () {
     $.ajax({
@@ -99,13 +105,16 @@ function SuccessMethod(result) {
             $("#divMessages").slideUp(1000);
         });
 
-        $.ajax({
-            type: "GET",
-            url: "/UserType/UserTypeGrid"
-        }).done(function (response) {
-            $("#UserTypeGridBlock").html('');
-            $("#UserTypeGridBlock").html(response);
-        });
+        $('#dtUserTypes').DataTable().ajax.reload(null, false);
+        //$('#dtUserTypes').ajax.reload();
+
+        //$.ajax({
+        //    type: "GET",
+        //    url: "/UserType/UserTypeGrid"
+        //}).done(function (response) {
+        //    $("#UserTypeGridBlock").html('');
+        //    $("#UserTypeGridBlock").html(response);
+        //});
     }
     else {
         $("#msgBlock").html("<div id='divMessage' class='fade-in' role='alert'><span id='spnMsg'></span><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");

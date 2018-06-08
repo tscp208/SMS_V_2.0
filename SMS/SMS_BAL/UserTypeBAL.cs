@@ -12,9 +12,9 @@ namespace SMS_BAL
     {
         public UserTypeDAL userTypeDAL = new UserTypeDAL();
 
-        public List<UserTypeEntity> GetUserTypes()
+        public List<UserTypeEntity> GetUserTypes(int start, int length, string sortColumn, string sortDir, out int totalRecords)
         {
-            return userTypeDAL.GetUserTypes();
+            return userTypeDAL.GetUserTypes(start, length, sortColumn, sortDir,out totalRecords);
         }
 
         public UserTypeEntity GetUserTypeByID(int userTypeID)

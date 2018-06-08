@@ -34,7 +34,6 @@ namespace SMS.CustomMapper
                     .ForMember(usertype => usertype.ModifiedOn, map => map.MapFrom(p => p.ModifiedOn))
                     .ForMember(usertype => usertype.IsDeleted, map => map.MapFrom(p => p.IsDeleted));
             });
-            //Mapper.Map(UserTypeEntity, SMS.Models.UserType.UserTypeModel);
         }
     }
 }
