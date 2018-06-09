@@ -15,7 +15,7 @@ namespace SMS_DAL
         DataTable dt = new DataTable();
         SqlDataAdapter da = new SqlDataAdapter();
 
-        public List<UserTypeEntity> GetUserTypes(int start, int length, string sortColumn, string sortDir, out int totalRecords)
+        public List<UserTypeEntity> GetUserTypes(int start, int length, string sortColumn, string sortDir, string searchTerm, out int totalRecords)
         {
             totalRecords = 0;
             List<UserTypeEntity> userTypes = new List<UserTypeEntity>();
@@ -31,6 +31,7 @@ namespace SMS_DAL
                         cmd.Parameters.AddWithValue("@length", length);
                         cmd.Parameters.AddWithValue("@sortColumn", sortColumn);
                         cmd.Parameters.AddWithValue("@sortDir", sortDir);
+                        cmd.Parameters.AddWithValue("@searchTerm", searchTerm);
                         cmd.Parameters.Add("@totalRecord", SqlDbType.Int);
                         cmd.Parameters["@totalRecord"].Direction = ParameterDirection.Output;
                         da.SelectCommand = cmd;

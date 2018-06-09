@@ -21,16 +21,16 @@ namespace SMS.Controllers
         public ActionResult UserTypeGrid()
         {
             int totalRecords = 0;
-            return PartialView("_UserTypeGrid", GetUserTypes(1, 5, "Srno", "asc",out totalRecords));
+            return PartialView("_UserTypeGrid", GetUserTypes(1, 5, "Srno", "asc", "", out totalRecords));
         }
 
-        public List<UserTypeViewModel> GetUserTypes(int start, int length, string sortColumn, string sortDir, out int totalRecords)
+        public List<UserTypeViewModel> GetUserTypes(int start, int length, string sortColumn, string sortDir, string searchTerm,out int totalRecords)
         {
             List<UserTypeViewModel> userTypes = new List<UserTypeViewModel>();
             List<UserTypeEntity> userTypeEntities = new List<UserTypeEntity>();
             try
             {
-                userTypeEntities = userTypeBAL.GetUserTypes(start, length, sortColumn, sortDir,out totalRecords);
+                userTypeEntities = userTypeBAL.GetUserTypes(start, length, sortColumn, sortDir, searchTerm, out totalRecords);
                 userTypes = AutoMapper.Mapper.Map<List<UserTypeEntity>, List<UserTypeViewModel>>(userTypeEntities);
 
                 return userTypes;
@@ -123,10 +123,11 @@ namespace SMS.Controllers
             int length = Convert.ToInt32(Request.Form.GetValues("length").FirstOrDefault());
             string sortColumn = Request.Form.GetValues("columns[" + Request.Form.GetValues("order[0][column]").FirstOrDefault() + "][name]").FirstOrDefault().ToString();
             string sortDir = Request.Form.GetValues("order[0][dir]").FirstOrDefault().ToString();
+            string searchTerm = Request.Form.GetValues("search[value]").FirstOrDefault().ToString(); ;
             List<UserTypeViewModel> userTypes = new List<UserTypeViewModel>();
             try
-            {   
-                userTypes = GetUserTypes(start, length, sortColumn, sortDir, out totalRecords);
+            {
+                userTypes = GetUserTypes(start, length, sortColumn, sortDir, searchTerm, out totalRecords);
 
                 //string search = Request.QueryString["search[value]"];
                 //int sortColumn = -1;

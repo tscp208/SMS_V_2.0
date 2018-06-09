@@ -1,5 +1,6 @@
 ﻿$(document).ready(function () {
     $('#dtUserTypes').dataTable({
+        //"language": { search: "" },
         "processing": true, // for show progress bar  
         "serverSide": true, // for process server side
         "lengthMenu": [[5, 10, 20, 50, 100], [5, 10, 20, 50, 100]],
@@ -105,7 +106,7 @@ function SuccessMethod(result) {
             $("#divMessages").slideUp(1000);
         });
 
-        $('#dtUserTypes').DataTable().ajax.reload(null, false);
+        $('#dtUserTypes').DataTable().ajax.reload(null, true);
         //$('#dtUserTypes').ajax.reload();
 
         //$.ajax({
