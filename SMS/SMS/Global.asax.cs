@@ -13,6 +13,7 @@ namespace SMS
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            CustomMapper.CustomMapper.Configure();
         }
     }
 }

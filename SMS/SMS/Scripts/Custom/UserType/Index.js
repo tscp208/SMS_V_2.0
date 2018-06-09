@@ -1,4 +1,62 @@
-﻿
+﻿$(document).ready(function () {
+    $('#dtUserTypes').dataTable({
+        //"language": { search: "" },
+        "processing": true, // for show progress bar  
+        "serverSide": true, // for process server side
+        "lengthMenu": [[5, 10, 20, 50, 100], [5, 10, 20, 50, 100]],
+        //"info": true,
+        "ajax": {
+            "url": "/UserType/GetUserTypeData",
+            "type": "POST",
+            "datatype": "json",
+            "dataSrc": function (result) {
+                return result.data;
+            }
+        },
+        "columnDefs":
+        [{
+            "targets": [0],
+            "visible": false,
+            "searchable": false
+        },
+        {
+            "targets": [1],
+            "searchable": false,
+            "orderable": false
+        },
+        {
+            "targets": [2],
+            "searchable": false
+        },
+        {
+            "targets": [3],
+            "searchable": false
+        },
+        {
+            "targets": [4],
+            "orderable": false
+        }],
+        "columns": [
+            { "data": "UserTypeID", "name": "UserTypeID", "autoWidth": true },
+            { "data": "SrNo", "name": "SrNo", "title": "Sr No.", "autoWidth": true },
+            { "data": "UserTypeName", "title": "User Type", "name": "UserTypeName", "autoWidth": true },
+            { "data": "UserTypeDesc", "name": "UserTypeDesc", "title": "Description", "autoWidth": true },
+            {
+                "render": function (data, type, full, meta)
+                { return "<a href='#' class='glyphicon glyphicon-edit' style='font-size:17px;text-decoration:none;' onclick = EditUserType('" + full.UserTypeID + "'); ></a> <a href='#' class='glyphicon glyphicon-remove' style='font-size:17px;color: #ff000094;text-decoration:none;' onclick=DeleteUserType('" + full.UserTypeID + "'); ></a>"; }
+            }
+        ],
+        aaSorting: [[0, 'asc']]
+    });
+
+    $('#dtUserTypes_filter input').unbind();
+    $('#dtUserTypes_filter input').bind('keyup', function (e) {
+        if (e.keyCode == 13) {
+            $('#dtUserTypes').DataTable().search(this.value).draw();
+        }
+    });
+});
+
 $("#btnAddUserType").click(function () {
     $.ajax({
         type: "GET",
@@ -48,13 +106,16 @@ function SuccessMethod(result) {
             $("#divMessages").slideUp(1000);
         });
 
-        $.ajax({
-            type: "GET",
-            url: "/UserType/UserTypeGrid"
-        }).done(function (response) {
-            $("#UserTypeGridBlock").html('');
-            $("#UserTypeGridBlock").html(response);
-        });
+        $('#dtUserTypes').DataTable().ajax.reload(null, true);
+        //$('#dtUserTypes').ajax.reload();
+
+        //$.ajax({
+        //    type: "GET",
+        //    url: "/UserType/UserTypeGrid"
+        //}).done(function (response) {
+        //    $("#UserTypeGridBlock").html('');
+        //    $("#UserTypeGridBlock").html(response);
+        //});
     }
     else {
         $("#msgBlock").html("<div id='divMessage' class='fade-in' role='alert'><span id='spnMsg'></span><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");

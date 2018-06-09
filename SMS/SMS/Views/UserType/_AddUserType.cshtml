@@ -1,42 +1,37 @@
 ﻿@model SMS.Models.UserType.UserTypeModel
 
-@using (Ajax.BeginForm("AddUserType", "UserType", new AjaxOptions { HttpMethod = "POST", OnSuccess="SuccessMethod" }))
+@using (Ajax.BeginForm("AddUserType", "UserType", new AjaxOptions { HttpMethod = "POST", OnSuccess = "SuccessMethod" }))
 {
     @Html.AntiForgeryToken()
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 id="modalTitle" class="modal-title">Add User Type</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-horizontal">
+            @Html.HiddenFor(model => model.UserTypeID)
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.LabelFor(model => model.UserTypeName, htmlAttributes: new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.UserTypeName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.UserTypeName, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-    <div class="form-horizontal">
-        @Html.HiddenFor(model => model.UserTypeID)
-        <div class="form-group">
-            <div class="col-md-10">
-                @Html.LabelFor(model => model.UserTypeName, htmlAttributes: new { @class = "control-label" })
-                @Html.TextBoxFor(model => model.UserTypeName, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.UserTypeName, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.LabelFor(model => model.UserTypeDesc, htmlAttributes: new { @class = "control-label" })
+                    @Html.TextAreaFor(model => model.UserTypeDesc, new { @class = "form-control", style = "height: 125px" })
+                    @Html.ValidationMessageFor(model => model.UserTypeDesc, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-10">
-                @Html.LabelFor(model => model.UserTypeDesc, htmlAttributes: new { @class = "control-label" })
-                @Html.TextAreaFor(model => model.UserTypeDesc, new { @class = "form-control", style = "height: 125px" })
-                @Html.ValidationMessageFor(model => model.UserTypeDesc, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <div id="msgBlock" class="col-md-10" />
             </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-10">
-                @if (Model.UserTypeID > 0)
-                {
-                    <input type="submit" value="Update" class="btn btn-info" />
-                }
-                else
-                {
-                    <input type="submit" value="Create" class="btn btn-info" />
-                }
-                <input type="reset" value="Cancel" class="btn btn-warning" />
-            </div>
-        </div>
-        <div class="form-group">
-            <div id="msgBlock" class="col-md-10" />
         </div>
     </div>
+    <div class="modal-footer">
+        <input type="submit" value="@(Model.UserTypeID > 0 ? "Update" : "Create" )" class="btn btn-info" />
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
 }
-

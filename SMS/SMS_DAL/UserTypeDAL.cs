@@ -15,10 +15,10 @@ namespace SMS_DAL
         DataTable dt = new DataTable();
         SqlDataAdapter da = new SqlDataAdapter();
 
-        public List<UserTypeEntity> GetUserTypes()
+        public List<UserTypeEntity> GetUserTypes(int start, int length, string sortColumn, string sortDir, string searchTerm, out int totalRecords)
         {
+            totalRecords = 0;
             List<UserTypeEntity> userTypes = new List<UserTypeEntity>();
-
             try
             {
                 using (SqlConnection con = new SqlConnection(Connection.dbConnection))
@@ -27,8 +27,17 @@ namespace SMS_DAL
                     using (SqlCommand cmd = new SqlCommand("usp_GetUserTypes", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@start", start);
+                        cmd.Parameters.AddWithValue("@length", length);
+                        cmd.Parameters.AddWithValue("@sortColumn", sortColumn);
+                        cmd.Parameters.AddWithValue("@sortDir", sortDir);
+                        cmd.Parameters.AddWithValue("@searchTerm", searchTerm);
+                        cmd.Parameters.Add("@totalRecord", SqlDbType.Int);
+                        cmd.Parameters["@totalRecord"].Direction = ParameterDirection.Output;
                         da.SelectCommand = cmd;
                         da.Fill(dt);
+
+                        totalRecords = Convert.ToInt32(cmd.Parameters["@totalRecord"].Value);
                     }
                 }
 
