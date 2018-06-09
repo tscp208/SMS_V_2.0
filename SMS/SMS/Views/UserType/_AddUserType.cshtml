@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ﻿@model SMS.Models.UserType.UserTypeModel
 
 @using (Ajax.BeginForm("AddUserType", "UserType", new AjaxOptions { HttpMethod = "POST", OnSuccess = "SuccessMethod" }))
@@ -36,40 +35,3 @@
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
     </div>
 }
-=======
-﻿@model SMS.Models.UserType.UserTypeModel
-
-@using (Ajax.BeginForm("AddUserType", "UserType", new AjaxOptions { HttpMethod = "POST", OnSuccess="SuccessMethod" }))
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        @Html.HiddenFor(model => model.UserTypeID)
-        <div class="form-group">
-            <div class="col-md-10">
-                @Html.LabelFor(model => model.UserTypeName, htmlAttributes: new { @class = "control-label" })
-                @Html.TextBoxFor(model => model.UserTypeName, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.UserTypeName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-10">
-                @Html.LabelFor(model => model.UserTypeDesc, htmlAttributes: new { @class = "control-label" })
-                @Html.TextAreaFor(model => model.UserTypeDesc, new { @class = "form-control", style = "height: 125px" })
-                @Html.ValidationMessageFor(model => model.UserTypeDesc, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-10">
-                <input type="submit" value="Save" class="btn btn-info" />
-                <input type="reset" value="Cancel" class="btn btn-warning" />
-            </div>
-        </div>
-        <div class="form-group">
-            <div id="msgBlock" class="col-md-10" />
-        </div>
-    </div>
-}
-
->>>>>>> harsh_branch
