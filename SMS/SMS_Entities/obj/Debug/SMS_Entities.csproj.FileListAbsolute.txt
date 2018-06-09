@@ -7,7 +7,3 @@ D:\Samples\MVC\SchoolManagementMVC\SMS\SMS_Entities\bin\Debug\SMS_Entities.dll
 D:\Samples\MVC\SchoolManagementMVC\SMS\SMS_Entities\bin\Debug\SMS_Entities.pdb
 D:\Samples\MVC\SchoolManagementMVC\SMS\SMS_Entities\obj\Debug\SMS_Entities.dll
 D:\Samples\MVC\SchoolManagementMVC\SMS\SMS_Entities\obj\Debug\SMS_Entities.pdb
-C:\Users\kanthh\Documents\GitHub\SMS_V_2.0\SMS\SMS_Entities\bin\Debug\SMS_Entities.dll
-C:\Users\kanthh\Documents\GitHub\SMS_V_2.0\SMS\SMS_Entities\bin\Debug\SMS_Entities.pdb
-C:\Users\kanthh\Documents\GitHub\SMS_V_2.0\SMS\SMS_Entities\obj\Debug\SMS_Entities.dll
-C:\Users\kanthh\Documents\GitHub\SMS_V_2.0\SMS\SMS_Entities\obj\Debug\SMS_Entities.pdb
