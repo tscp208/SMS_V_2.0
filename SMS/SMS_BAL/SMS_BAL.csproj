@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UsersBALcs.cs" />
     <Compile Include="UserTypeBAL.cs" />
   </ItemGroup>
   <ItemGroup>
