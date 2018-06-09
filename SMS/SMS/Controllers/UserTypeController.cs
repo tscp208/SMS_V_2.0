@@ -1,4 +1,5 @@
-﻿using SMS.Models.UserType;
+﻿using Newtonsoft.Json;
+using SMS.Models.UserType;
 using SMS_BAL;
 using SMS_Entities;
 using System;
@@ -19,45 +20,59 @@ namespace SMS.Controllers
 
         public ActionResult UserTypeGrid()
         {
-            return PartialView("_UserTypeGrid", GetUserTypes());
+            int totalRecords = 0;
+            return PartialView("_UserTypeGrid", GetUserTypes(1, 5, "Srno", "asc", "", out totalRecords));
         }
 
-        public List<UserTypeViewModel> GetUserTypes()
+        public List<UserTypeViewModel> GetUserTypes(int start, int length, string sortColumn, string sortDir, string searchTerm,out int totalRecords)
         {
             List<UserTypeViewModel> userTypes = new List<UserTypeViewModel>();
             List<UserTypeEntity> userTypeEntities = new List<UserTypeEntity>();
+            try
+            {
+                userTypeEntities = userTypeBAL.GetUserTypes(start, length, sortColumn, sortDir, searchTerm, out totalRecords);
+                userTypes = AutoMapper.Mapper.Map<List<UserTypeEntity>, List<UserTypeViewModel>>(userTypeEntities);
 
-            userTypeEntities = userTypeBAL.GetUserTypes();
-
-            userTypes = userTypeEntities.Select(item => new UserTypeViewModel()
-                        {
-                            UserTypeID = item.UserTypeID,
-                            SrNo = item.SrNo,
-                            UserTypeName = item.UserTypeName,
-                            UserTypeDesc = item.UserTypeDesc
-                        }).ToList();
-
-            return userTypes;
+                return userTypes;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                userTypes = null;
+                userTypeEntities = null;
+            }
         }
 
         [HttpGet]
         public ActionResult AddUserType(int userTypeID = 0)
         {
-            if(userTypeID > 0)
+            UserTypeEntity userTypeEntity = new UserTypeEntity();
+            UserTypeModel userTypeModel = new UserTypeModel();
+            try
             {
-                UserTypeEntity userTypeEntity = new UserTypeEntity();
-                userTypeEntity = userTypeBAL.GetUserTypeByID(userTypeID);
+                if (userTypeID > 0)
+                {
+                    userTypeEntity = userTypeBAL.GetUserTypeByID(userTypeID);
+                    userTypeModel = AutoMapper.Mapper.Map<UserTypeEntity, UserTypeModel>(userTypeEntity);
 
-                UserTypeModel userTypeModel = new UserTypeModel();
-                userTypeModel.UserTypeID = userTypeEntity.UserTypeID;
-                userTypeModel.UserTypeName = userTypeEntity.UserTypeName;
-                userTypeModel.UserTypeDesc = userTypeEntity.UserTypeDesc;                
-                
-                return PartialView("_AddUserType", userTypeModel);
+                    return PartialView("_AddUserType", userTypeModel);
+                }
+                else
+                {
+                    return PartialView("_AddUserType", new UserTypeModel());
+                }
             }
-            else
+            catch (Exception)
             {
-                return PartialView("_AddUserType", new UserTypeModel());
+                throw;
+            }
+            finally
+            {
+                userTypeEntity = null;
+                userTypeModel = null;
             }
         }
 
@@ -65,33 +80,26 @@ namespace SMS.Controllers
         public JsonResult AddUserType(UserTypeModel userTypeModel)
         {
             UserTypeEntity userTypeEntity = new UserTypeEntity();
-            userTypeEntity.UserTypeID = userTypeModel.UserTypeID;
-            userTypeEntity.UserTypeName = userTypeModel.UserTypeName;
-            userTypeEntity.UserTypeDesc = userTypeModel.UserTypeDesc;
-            userTypeEntity.CreatedBy = 1;
-            userTypeEntity.CreatedOn = DateTime.Now.ToString();
-            userTypeEntity.ModifiedBy = 1;
-            userTypeEntity.ModifiedOn = DateTime.Now.ToString();
-            userTypeEntity.IsDeleted = false;
+            userTypeEntity = AutoMapper.Mapper.Map<UserTypeModel, UserTypeEntity>(userTypeModel);
 
             bool status = userTypeBAL.UpdateUserType(userTypeEntity);
 
             if (status)
             {
-                if(userTypeModel.UserTypeID > 0)
-                    return Json(new { Message = "User Type Updated Successfully..!", Status = status}, JsonRequestBehavior.AllowGet);
+                if (userTypeModel.UserTypeID > 0)
+                    return Json(new { Message = "User Type Updated Successfully..!", Status = status }, JsonRequestBehavior.AllowGet);
                 else
                     return Json(new { Message = "User Type Added Successfully..!", Status = status }, JsonRequestBehavior.AllowGet);
             }
             else
             {
-                return Json(new { Message = "Operation Failed..!", Status = status}, JsonRequestBehavior.AllowGet );
+                return Json(new { Message = "Operation Failed..!", Status = status }, JsonRequestBehavior.AllowGet);
             }
         }
 
         public JsonResult IsUserTypeExist(string userTypeName, int userTypeID)
         {
-            bool isExist = userTypeBAL.IsUserTypeExist(userTypeName,userTypeID);
+            bool isExist = userTypeBAL.IsUserTypeExist(userTypeName, userTypeID);
 
             return Json(!isExist, JsonRequestBehavior.AllowGet);
         }
@@ -100,11 +108,64 @@ namespace SMS.Controllers
         {
             bool status = userTypeBAL.DeleteUserType(userTypeID);
 
-            if(status)
+            if (status)
                 return Json(new { Message = "User type Deleted Successfully..!", Status = true }, JsonRequestBehavior.AllowGet);
             else
                 return Json(new { Message = "Operation Failed..!", Status = true }, JsonRequestBehavior.AllowGet);
         }
-        
+
+        [HttpPost]
+        public ActionResult GetUserTypeData()
+        {
+            int totalRecords;
+            int draw = Convert.ToInt32(Request.Form.GetValues("draw").FirstOrDefault());
+            int start = Convert.ToInt32(Request.Form.GetValues("start").FirstOrDefault());
+            int length = Convert.ToInt32(Request.Form.GetValues("length").FirstOrDefault());
+            string sortColumn = Request.Form.GetValues("columns[" + Request.Form.GetValues("order[0][column]").FirstOrDefault() + "][name]").FirstOrDefault().ToString();
+            string sortDir = Request.Form.GetValues("order[0][dir]").FirstOrDefault().ToString();
+            string searchTerm = Request.Form.GetValues("search[value]").FirstOrDefault().ToString(); ;
+            List<UserTypeViewModel> userTypes = new List<UserTypeViewModel>();
+            try
+            {
+                userTypes = GetUserTypes(start, length, sortColumn, sortDir, searchTerm, out totalRecords);
+
+                //string search = Request.QueryString["search[value]"];
+                //int sortColumn = -1;
+                //string sortDirection = "asc";
+                //if (length == -1)
+                //{
+                //    length = TOTAL_ROWS;
+                //}
+
+                //// note: we only sort one column at a time
+                //if (Request.QueryString["order[0][column]"] != null)
+                //{
+                //    sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
+                //}
+                //if (Request.QueryString["order[0][dir]"] != null)
+                //{
+                //    sortDirection = Request.QueryString["order[0][dir]"];
+                //}
+
+                //DataTableData dataTableData = new DataTableData();
+                //dataTableData.draw = draw;
+                //dataTableData.recordsTotal = TOTAL_ROWS;
+                //int recordsFiltered = 0;
+                //dataTableData.data = FilterData(ref recordsFiltered, start, length, search, sortColumn, sortDirection);
+                //dataTableData.recordsFiltered = recordsFiltered;
+
+                return Json(new { draw = draw, recordsTotal = totalRecords, recordsFiltered = totalRecords, data = userTypes }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+            finally
+            {   
+                userTypes = null;
+
+            }
+        }
     }
 }

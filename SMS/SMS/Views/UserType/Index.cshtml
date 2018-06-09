@@ -10,9 +10,29 @@
         <h3>User Types</h3>
     </div>
 </div>
-<div class="col-lg-1 pt30">
+<div class="col-lg-1 pt20">
     <input id="btnAddUserType" type="button" value="Add User Type" class="btn btn-primary pull-right pr30" />
 </div>
+<div class="col-lg-12">
+    <hr />
+</div>
+@*<div>
+    <div class="container">
+        <br />
+        <div style="width:90%; margin:0 auto;">
+            <table id="dtUserTypes" class="table table-striped table-bordered dt-responsive nowrap" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>UserTypeID</th>
+                        <th>SrNo</th>
+                        <th>UserTypeName</th>
+                        <th>UserTypeDesc</th>                        
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>*@
 <div id="UserTypeGridBlock">
     @{Html.RenderAction("UserTypeGrid", "UserType");}
 </div>
@@ -21,16 +41,7 @@
 <div id="userTypeModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Add User Type</h4>
-            </div>
-            <div class="modal-body" id="modalBody">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
+        <div id="modalBody" class="modal-content">
         </div>
     </div>
 </div>
@@ -38,10 +49,6 @@
 @section scripts{
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-
-    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-
-    @*<script src="~/Scripts/jquery.validate.min.js"></script>
-        <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>    
     <script src="~/Scripts/Custom/UserType/Index.js"></script>
 }
