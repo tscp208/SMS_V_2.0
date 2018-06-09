@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿@{
     ViewBag.Title = "Index";
 }
@@ -52,3 +53,52 @@
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>    
     <script src="~/Scripts/Custom/UserType/Index.js"></script>
 }
+=======
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<div class="form-group">
+    <div id="msgBlocks" class="col-md-12" />
+</div>
+<div class="col-lg-11">
+    <div class="panel-heading">
+        <h3>User Types</h3>
+    </div>
+</div>
+<div class="col-lg-1 pt30">
+    <input id="btnAddUserType" type="button" value="Add User Type" class="btn btn-primary pull-right pr30" />
+</div>
+<div id="UserTypeGridBlock">
+    @{Html.RenderAction("UserTypeGrid", "UserType");}
+</div>
+
+<!-- Modal -->
+<div id="userTypeModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add User Type</h4>
+            </div>
+            <div class="modal-body" id="modalBody">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+    @*<script src="~/Scripts/jquery.validate.min.js"></script>
+        <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
+    <script src="~/Scripts/Custom/UserType/Index.js"></script>
+}
+>>>>>>> harsh_branch
