@@ -1,10 +1,11 @@
 ﻿$(document).ready(function () {
-    $('#dtUserTypes').dataTable({
-        //"language": { search: "" },
-        "processing": true, // for show progress bar  
+    var table = $('#dtUserTypes').dataTable({
+        "language": {
+            search: "",
+            searchPlaceholder: "Search Text.."
+        },
         "serverSide": true, // for process server side
         "lengthMenu": [[5, 10, 20, 50, 100], [5, 10, 20, 50, 100]],
-        //"info": true,
         "ajax": {
             "url": "/UserType/GetUserTypeData",
             "type": "POST",
@@ -17,7 +18,8 @@
         [{
             "targets": [0],
             "visible": false,
-            "searchable": false
+            "searchable": false,
+            "orderable": false
         },
         {
             "targets": [1],
@@ -49,12 +51,12 @@
         aaSorting: [[0, 'asc']]
     });
 
-    $('#dtUserTypes_filter input').unbind();
-    $('#dtUserTypes_filter input').bind('keyup', function (e) {
-        if (e.keyCode == 13) {
-            $('#dtUserTypes').DataTable().search(this.value).draw();
-        }
-    });
+    //$('#dtUserTypes_filter input').unbind();
+    //$('#dtUserTypes_filter input').bind('keyup', function (e) {
+    //    if (e.keyCode == 13 || this.value == "") {
+    //        $('#dtUserTypes').DataTable().search(this.value).draw();
+    //    }
+    //});
 });
 
 $("#btnAddUserType").click(function () {
@@ -105,17 +107,7 @@ function SuccessMethod(result) {
         $("#divMessages").fadeTo(2000, 500).slideUp(500, function () {
             $("#divMessages").slideUp(1000);
         });
-
         $('#dtUserTypes').DataTable().ajax.reload(null, true);
-        //$('#dtUserTypes').ajax.reload();
-
-        //$.ajax({
-        //    type: "GET",
-        //    url: "/UserType/UserTypeGrid"
-        //}).done(function (response) {
-        //    $("#UserTypeGridBlock").html('');
-        //    $("#UserTypeGridBlock").html(response);
-        //});
     }
     else {
         $("#msgBlock").html("<div id='divMessage' class='fade-in' role='alert'><span id='spnMsg'></span><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");

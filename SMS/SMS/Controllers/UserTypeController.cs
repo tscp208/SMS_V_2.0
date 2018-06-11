@@ -6,25 +6,26 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using SMS_Common;
 
 namespace SMS.Controllers
 {
     public class UserTypeController : Controller
     {
         public UserTypeBAL userTypeBAL = new UserTypeBAL();
-        // GET: UserType
+        
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult UserTypeGrid()
-        {
-            int totalRecords = 0;
-            return PartialView("_UserTypeGrid", GetUserTypes(1, 5, "Srno", "asc", "", out totalRecords));
-        }
+        //public ActionResult UserTypeGrid()
+        //{
+        //    int totalRecords = 0;
+        //    return PartialView("_UserTypeGrid", GetUserTypes(1, 5, "UserTypeID", "asc", "", out totalRecords));
+        //}
 
-        public List<UserTypeViewModel> GetUserTypes(int start, int length, string sortColumn, string sortDir, string searchTerm,out int totalRecords)
+        public List<UserTypeViewModel> GetUserTypes(int start, int length, string sortColumn, string sortDir, string searchTerm, out int totalRecords)
         {
             List<UserTypeViewModel> userTypes = new List<UserTypeViewModel>();
             List<UserTypeEntity> userTypeEntities = new List<UserTypeEntity>();
@@ -32,7 +33,6 @@ namespace SMS.Controllers
             {
                 userTypeEntities = userTypeBAL.GetUserTypes(start, length, sortColumn, sortDir, searchTerm, out totalRecords);
                 userTypes = AutoMapper.Mapper.Map<List<UserTypeEntity>, List<UserTypeViewModel>>(userTypeEntities);
-
                 return userTypes;
             }
             catch (Exception)
@@ -57,7 +57,6 @@ namespace SMS.Controllers
                 {
                     userTypeEntity = userTypeBAL.GetUserTypeByID(userTypeID);
                     userTypeModel = AutoMapper.Mapper.Map<UserTypeEntity, UserTypeModel>(userTypeEntity);
-
                     return PartialView("_AddUserType", userTypeModel);
                 }
                 else
@@ -81,26 +80,24 @@ namespace SMS.Controllers
         {
             UserTypeEntity userTypeEntity = new UserTypeEntity();
             userTypeEntity = AutoMapper.Mapper.Map<UserTypeModel, UserTypeEntity>(userTypeModel);
-
             bool status = userTypeBAL.UpdateUserType(userTypeEntity);
 
             if (status)
             {
                 if (userTypeModel.UserTypeID > 0)
-                    return Json(new { Message = "User Type Updated Successfully..!", Status = status }, JsonRequestBehavior.AllowGet);
+                    return Json(new { Message = Messages.UserTypeUpdated, Status = status }, JsonRequestBehavior.AllowGet);
                 else
-                    return Json(new { Message = "User Type Added Successfully..!", Status = status }, JsonRequestBehavior.AllowGet);
+                    return Json(new { Message = Messages.UserTypeInserted, Status = status }, JsonRequestBehavior.AllowGet);
             }
             else
             {
-                return Json(new { Message = "Operation Failed..!", Status = status }, JsonRequestBehavior.AllowGet);
+                return Json(new { Message = Messages.OperationFailed, Status = status }, JsonRequestBehavior.AllowGet);
             }
         }
 
         public JsonResult IsUserTypeExist(string userTypeName, int userTypeID)
         {
             bool isExist = userTypeBAL.IsUserTypeExist(userTypeName, userTypeID);
-
             return Json(!isExist, JsonRequestBehavior.AllowGet);
         }
 
@@ -109,9 +106,9 @@ namespace SMS.Controllers
             bool status = userTypeBAL.DeleteUserType(userTypeID);
 
             if (status)
-                return Json(new { Message = "User type Deleted Successfully..!", Status = true }, JsonRequestBehavior.AllowGet);
+                return Json(new { Message = Messages.UserTypeDeleted, Status = true }, JsonRequestBehavior.AllowGet);
             else
-                return Json(new { Message = "Operation Failed..!", Status = true }, JsonRequestBehavior.AllowGet);
+                return Json(new { Message = Messages.OperationFailed, Status = true }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -128,43 +125,15 @@ namespace SMS.Controllers
             try
             {
                 userTypes = GetUserTypes(start, length, sortColumn, sortDir, searchTerm, out totalRecords);
-
-                //string search = Request.QueryString["search[value]"];
-                //int sortColumn = -1;
-                //string sortDirection = "asc";
-                //if (length == -1)
-                //{
-                //    length = TOTAL_ROWS;
-                //}
-
-                //// note: we only sort one column at a time
-                //if (Request.QueryString["order[0][column]"] != null)
-                //{
-                //    sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
-                //}
-                //if (Request.QueryString["order[0][dir]"] != null)
-                //{
-                //    sortDirection = Request.QueryString["order[0][dir]"];
-                //}
-
-                //DataTableData dataTableData = new DataTableData();
-                //dataTableData.draw = draw;
-                //dataTableData.recordsTotal = TOTAL_ROWS;
-                //int recordsFiltered = 0;
-                //dataTableData.data = FilterData(ref recordsFiltered, start, length, search, sortColumn, sortDirection);
-                //dataTableData.recordsFiltered = recordsFiltered;
-
                 return Json(new { draw = draw, recordsTotal = totalRecords, recordsFiltered = totalRecords, data = userTypes }, JsonRequestBehavior.AllowGet);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                
                 throw;
             }
             finally
-            {   
+            {
                 userTypes = null;
-
             }
         }
     }

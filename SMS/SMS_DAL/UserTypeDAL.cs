@@ -50,7 +50,7 @@ namespace SMS_DAL
                 }).ToList();
                 return userTypes;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return new List<UserTypeEntity>();
             }
@@ -87,7 +87,7 @@ namespace SMS_DAL
 
                 return userType;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return new UserTypeEntity();
             }
@@ -127,7 +127,7 @@ namespace SMS_DAL
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
@@ -136,7 +136,7 @@ namespace SMS_DAL
         public bool IsUserTypeExist(string userType, int userTypeID)
         {
             string strQry = "";
-            if(userTypeID > 0)
+            if (userTypeID > 0)
                 strQry = "Select * From tblUserType Where IsDeleted = 0 And UserTypeName = @UserTypeName And UserTypeID <> @UserTypeID";
             else
                 strQry = "Select * From tblUserType Where IsDeleted = 0 And UserTypeName = @UserTypeName";
@@ -157,7 +157,7 @@ namespace SMS_DAL
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
@@ -186,7 +186,7 @@ namespace SMS_DAL
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
@@ -209,20 +209,17 @@ namespace SMS_DAL
                         cmd.Parameters.AddWithValue("@ModifiedOn", userTypeEntity.ModifiedOn);
                         int cnt = cmd.ExecuteNonQuery();
 
-                        //int userTypeID = Convert.ToInt32(cmd.Parameters["@UserTypeID"].Value);
                         if (cnt > 0)
                             return true;
                         else
                             return false;
-
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
-            return true;
         }
     }
 }

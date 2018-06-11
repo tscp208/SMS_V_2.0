@@ -476,6 +476,10 @@
       <Project>{1fdd4105-6a75-4023-aea7-659d04d1e36d}</Project>
       <Name>SMS_BAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SMS_Common\SMS_Common.csproj">
+      <Project>{23753662-23bd-435c-876b-fe76438a0308}</Project>
+      <Name>SMS_Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SMS_Entities\SMS_Entities.csproj">
       <Project>{0fb52b84-e9f4-4d48-bf0e-6dfdbbeea947}</Project>
       <Name>SMS_Entities</Name>

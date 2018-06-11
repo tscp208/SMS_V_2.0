@@ -12,11 +12,15 @@
     <link rel="shortcut icon" href="">
     <link href="~/Content/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/metisMenu.min.css" rel="stylesheet" />
+    <!-- DataTables CSS -->
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.css" rel="stylesheet" />
+    <!-- DataTables Responsive CSS -->
+    <link href="~/Content/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet" />
+
     <link href="~/Content/sb-admin-2.css" rel="stylesheet" />
-    @*<link href="~/Content/sb-admin-2.min.css" rel="stylesheet" />*@
+
+
     <link href="~/Content/vendor/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    @*<link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" />*@
-    <link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
     <link href="~/Content/Custom/custom.css" rel="stylesheet" />
 </head>
 
@@ -80,7 +84,12 @@
     </div>
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="~/Scripts/metisMenu.min.js"></script>    
+    <script src="~/Scripts/metisMenu.min.js"></script>
+
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.bootstrap.min.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.responsive.js"></script>
+    <script src="~/Scripts/sb-admin-2.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
